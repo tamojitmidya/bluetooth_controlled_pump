@@ -8,6 +8,7 @@ int n=1;
 int o=2;
 int p=3;
 int q=4;
+boolean tank_full = false;
 void setup() {
   Serial.begin(9600);
   pinMode(ledPin,OUTPUT); 
@@ -25,11 +26,13 @@ void loop() {
     readString += c;
   }
   if(readString.length() >0) {
-    
+    if(tank_full == false)
+    {
     if(readString == "on")
     {
       digitalWrite(ledPin, HIGH);
     }alu=1;
+    }
     
     if (readString == "off" || alu==0)
     {  
@@ -99,6 +102,7 @@ flag=5;
       case 5:
       Serial.println("96% - 100% : PUMP OFF");
       delay(1000);
+      tank_full = true;
       if(alu==1)
        {  
          digitalWrite(ledPin, LOW);
